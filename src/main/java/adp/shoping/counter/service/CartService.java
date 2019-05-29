@@ -3,6 +3,7 @@ package adp.shoping.counter.service;
 import adp.shoping.counter.model.Item;
 import adp.shoping.counter.model.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import java.util.LinkedHashMap;
 import java.util.List;

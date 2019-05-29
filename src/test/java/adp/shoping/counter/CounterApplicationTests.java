@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CounterApplicationTests {
 	@Test
 	public void makeShopeReadyTest() {
-		Shop s = Shop.getInstance();
+		Shop s = new Shop("", "");
 		Assert.assertNotNull(s);
 		Assert.assertEquals("Jeans", s.searchItem("A001").getName());
 	}

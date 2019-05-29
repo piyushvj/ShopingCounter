@@ -1,10 +1,8 @@
 package adp.shoping.counter.util;
 
-import adp.shoping.counter.model.BarcodeWrapper;
 import adp.shoping.counter.model.Invoice;
 import adp.shoping.counter.model.InvoiceRow;
 import adp.shoping.counter.model.Item;
-import adp.shoping.counter.service.InvoiceService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,19 +23,19 @@ public class TestData {
         return invoice;
     }
 
-    public static BarcodeWrapper getBarcodeWrapper(){
-        BarcodeWrapper barcodeWrapper = new BarcodeWrapper();
-        List<String> barcodes = new ArrayList<>();
-        barcodes.add("A001");
-        barcodes.add("B001");
-        barcodes.add("C001");
-        barcodes.add("A001");
-        barcodeWrapper.setBarcods(barcodes);
-        return barcodeWrapper;
-    }
+//    public static BarcodeWrapper getBarcodeWrapper(){
+//        BarcodeWrapper barcodeWrapper = new BarcodeWrapper();
+//        List<String> barcodes = new ArrayList<>();
+//        barcodes.add("A001");
+//        barcodes.add("B001");
+//        barcodes.add("C001");
+//        barcodes.add("A001");
+//        barcodeWrapper.setBarcods(barcodes);
+//        return barcodeWrapper;
+//    }
 
     public static Item getItem(String name, double price, String category){
-        return new Item(name, price, category);
+        return new Item("",name, price, category);
     }
 
     public static Map<Item, Integer> getItemCount() {

@@ -1,6 +1,5 @@
 package adp.shoping.counter.controller;
 
-import adp.shoping.counter.model.BarcodeWrapper;
 import adp.shoping.counter.model.Invoice;
 import adp.shoping.counter.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Main controller class for the whole application.
@@ -26,13 +27,14 @@ public class CounterController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @RequestMapping(value = "/product/purchased", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<Invoice> generateInvoice(@RequestBody BarcodeWrapper barcodes){
+    @RequestMapping(value = "/generateInvoice", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<Invoice> generateInvoice(@RequestBody List<String> barcodes){
+
         Invoice invoice;
         HttpStatus status;
         if(!StringUtils.isEmpty(barcodes)) {
             invoice = invoiceService.generateInvoiceBill(barcodes);
-            status = HttpStatus.ACCEPTED;
+            status = HttpStatus.OK;
         }else {
             invoice = new Invoice();
             status = HttpStatus.BAD_REQUEST;

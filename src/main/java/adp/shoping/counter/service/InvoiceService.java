@@ -1,15 +1,14 @@
 package adp.shoping.counter.service;
 
 import adp.shoping.counter.exception.ItemNotFoundException;
-import adp.shoping.counter.model.BarcodeWrapper;
-import adp.shoping.counter.model.Invoice;
-import adp.shoping.counter.model.InvoiceRow;
-import adp.shoping.counter.model.Item;
-import adp.shoping.counter.utility.ItemCategory;
+import adp.shoping.counter.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,35 +21,32 @@ import java.util.Set;
 @Service
 public class InvoiceService {
 
+    private static final Logger LOG= LoggerFactory.getLogger(InvoiceService.class);
+
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private Shop shop;
+
     public double getApplicableTaxAmount(double itemPrice, String itemCategory, Integer quantity){
+
         if(!StringUtils.isEmpty(itemPrice) && !StringUtils.isEmpty(itemCategory) && !StringUtils.isEmpty(quantity)) {
-            switch (itemCategory) {
-                case "A":
-                    return calculateTax(itemPrice, ItemCategory.A.getValue(), quantity);
-                case "B":
-                    return calculateTax(itemPrice, ItemCategory.B.getValue(), quantity);
-                case "C":
-                    return calculateTax(itemPrice, ItemCategory.C.getValue(), quantity);
-                default:
-                    return 0;
-            }
-        }else {
-            return 0;
+            return calculateTax(itemPrice, shop.getTax(itemCategory), quantity);
         }
+        return 0;
     }
 
     private double calculateTax(double itemPrice, double percentage, Integer quantity){
+
         return quantity*((itemPrice * percentage)/100);
     }
 
-    public Invoice generateInvoiceBill(BarcodeWrapper barcodes){
+    public Invoice generateInvoiceBill(List<String> barcodes){
         Invoice invoice = new Invoice();
-        if(null!=barcodes && !StringUtils.isEmpty(barcodes.getBarcods())) {
-            invoice.setTotalItem(barcodes.getBarcods().size());
-            cartService.createCart(barcodes.getBarcods());
+        if(!StringUtils.isEmpty(barcodes)) {
+            invoice.setTotalItem(barcodes.size());
+            cartService.createCart(barcodes);
             Map<Item, Integer> itemCount = cartService.getCustomerCart();
             Set<Item> itemSet = itemCount.keySet();
             InvoiceRow invoiceRow;
@@ -71,8 +67,10 @@ public class InvoiceService {
                 }
                 invoice.setTotalTax(invoice.getTotalTax() + taxAmout);
             }
+            itemCount.clear();
             invoice.setTotalBillAmount(invoice.getTotalPrice()+invoice.getTotalTax());
         } else {
+            LOG.error("Item Not Found");
             throw new ItemNotFoundException();
         }
         return invoice;

@@ -1,0 +1,56 @@
+[
+  {
+    "barcode": "A001",
+    "name":"Jeans",
+    "price": 3000.00,
+    "category": "A"
+  },
+  {
+    "barcode": "A002",
+    "name":"Shirt",
+    "price": 1500.00,
+    "category": "A"
+  },
+  {
+    "barcode": "A003",
+    "name":"Chinos",
+    "price": 1000.00,
+    "category": "A"
+  },
+  {
+    "barcode": "B001",
+    "name":"Potato",
+    "price": 20.00,
+    "category": "B"
+  },
+  {
+    "barcode": "B002",
+    "name":"Cabage",
+    "price": 30.00,
+    "category": "B"
+  },
+  {
+    "barcode": "B003",
+    "name":"Onion",
+    "price":15.00,
+    "category": "B"
+  },
+  {
+    "barcode": "C001",
+    "name":"Guitars",
+    "price": 20000.00,
+    "category": "C"
+  },
+  {
+    "barcode": "C002",
+    "name":"Violins",
+    "price": 10000.00,
+    "category": "C"
+  },
+  {
+    "barcode": "C003",
+    "name":"Trumpet",
+    "price": 15000.00,
+    "category": "C"
+  }
+]
