@@ -45,6 +45,7 @@ public class CounterController {
             status = HttpStatus.BAD_REQUEST;
             LOG.info("No Barcode entered");
         }
+
         return new ResponseEntity<>(invoice, status);
     }
 }
