@@ -14,6 +14,7 @@ import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ResourceUtils;
 import sun.dc.path.PathException;
 
 /**
@@ -52,7 +53,7 @@ public class ShopDB {
             throw new InvalidFilePathException("categoryPath");
         }
         Gson gson = new Gson();
-        try (Reader reader = new FileReader(categoryPath)) {
+        try (Reader reader = new FileReader(ResourceUtils.getFile("classpath:"+categoryPath))) {
             Type mapType = new TypeToken<Map<String, Integer>>(){}.getType();
             categoryMap = gson.fromJson(reader, mapType);
         } catch (IOException e) {
@@ -78,10 +79,10 @@ public class ShopDB {
     public void loadItems(String path) {
         if(null==path){
             LOG.info("Item path not give");
-            throw new InvalidFilePathException("Itempath not given");
+            throw new InvalidFilePathException("Item path not given");
         }
         Gson gson = new Gson();
-        try (Reader reader = new FileReader(path)) {
+        try (Reader reader = new FileReader(ResourceUtils.getFile("classpath:"+path))) {
             Type listType = new TypeToken<List<Item>>() {
             }.getType();
             itemList = gson.fromJson(reader, listType);

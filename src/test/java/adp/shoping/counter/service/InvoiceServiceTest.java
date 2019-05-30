@@ -47,15 +47,4 @@ public class InvoiceServiceTest {
         Invoice invoice = invoiceService.generateInvoiceBill(barcodes);
         Assert.assertNotNull(invoice);
     }
-
-//    @Test
-//    public void calculateTaxTest(){
-//        double taxAmount = invoiceService.calculateTax(3000, 10, 2);
-//        Assert.assertEquals(600, taxAmount, 0);
-//    }
-
-//    @Test(expected = ItemNotFoundException.class)
-//    public void generateInvoiceBillTestWhenNullBarcode(){
-//        invoiceService.generateInvoiceBill(null);
-//    }
 }
