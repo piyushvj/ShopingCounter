@@ -3,20 +3,22 @@ A shopping counter application developed with spring boot and test covered with 
 
 o	Clone code from git and run with IntelliJ IDEA.
 o	GIT URL: https://github.com/piyushvj/ShopingCounter
-o	From Post-Man make a POST request with below data [data in table].
-o	"A001", "A002", "A003" are the barcodes defined for items of category A
-o	"B001", "B002", "B003" are the barcodes defined for items of category B
-o	"C001", "C002", "C003" are the barcodes defined for items of category C
+o   Under Resources folder of project there are two json file named barcodeitems.json & category.json for configuring items and category     respectively.
+o   Please provide path for both the files in application.properties
+o	From Post-Man make a POST request with below data 
+
+REQUEST URL : http://localhost:9090/counter/generateInvoice
+
+HTTP METHOD : POST
+
+EQUEST PAYLOAD:
+[
+"A001",
+"A001",
+"B001"
+]
+
 o	Response data categories items according to category and calculate tax amount as per quantity and category. Also, it contains the total count of items purchased, total of item price, total of items tax, and grand total which a customer has to pay.
-
-
-REQUEST URL : http://localhost:9090/counter/product/purchased
-
-REQUEST PAYLOAD:
-
-{
-"barcods":["A001", "A001", "C001", "C003", "B003", "B003"]
-}
 
 RESPONSE PAYLOAD:
 
