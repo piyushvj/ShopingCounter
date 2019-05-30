@@ -48,6 +48,10 @@ public class Item implements Serializable {
         }
     }
 
+    public int hashCode(){
+        return this.getBarcode().hashCode();
+    }
+
     @Override
     public String toString (){
         return getBarcode()+" , "+ getName() +" , "+ getPrice() + " , " + getCategory();
